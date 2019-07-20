@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+
+	<link rel="stylesheet" type="text/css" href="style/textFormatting.css.php" />
+
+	<link rel="stylesheet" type="text/css" href="style/core.css.php" />
+	<link rel="stylesheet" type="text/css" href="style/partition.css.php" />
+	<link rel="stylesheet" type="text/css" href="style/cWindow.css.php" />
+	<link rel="stylesheet" type="text/css" href="style/drawer.css.php" />
+	<link rel="stylesheet" type="text/css" href="style/concertina.css.php" />
+	<link rel="stylesheet" type="text/css" href="style/tabs.css.php" />
+	<link rel="stylesheet" type="text/css" href="style/text.css.php" />
+
+	<link rel="stylesheet" type="text/css" href="style/entityInput.css.php" />
+
+	<link rel="stylesheet" type="text/css" href="style/treeView.css.php" />
+
+	<link rel="stylesheet" type="text/css" href="3rdParty/fontAwesome/css/font-awesome.css" />
+
+
+	<script src="js/core.js"></script>
+	<script src="js/textFormatting.js"></script>
+	<script src="js/xmlParser.js"></script>
+
+	<script src="js/partition.js"></script>
+	<script src="js/cWindow.js"></script>
+	<script src="js/drawer.js"></script>
+	<script src="js/concertina.js"></script>
+	<script src="js/tabs.js"></script>
+	<script src="js/text.js"></script>
+
+	<script src="js/conduit.js"></script>
+
+	<script src="js/entityInput.js"></script>
+	<script src="js/entityOutput.js"></script>
+	<script src="js/entityFeed.js"></script>
+	<script src="js/entityMetadata.js"></script>
+	<script src="js/clientCommandValidation.js.php"></script>
+	<script src="js/commands.js.php"></script>
+	<script src="js/handlers.js.php"></script>
+	<script src="js/treeView.js"></script>
+
+	<script src="3rdParty/moment/moment.js"></script>
+
+</head>
+
+<body>
+	<div id="mainHeader">
+		<div id="headerTitle">
+			infoPlinth v0.1&alpha;
+		</div>
+
+		<div id="search">
+			<i class="fa fa-search"></i>
+			<input type="text" id="searchInput" />
+		</div>
+	</div>
+	<div id="mainBody"></div>
+</body>
+
+<script>
+
+	var layoutXml =
+
+		'<drawer location="bottom" open="false">' +
+			'<entityInput id="test" />' +
+		'</drawer>' +
+
+		'<drawer location="right">' +
+			'<concertina>' +
+				'<section title="Test title 1">' +
+					'<text>' +
+						'Test text in a concertina.' +
+					'</text>' +
+				'</section>' +
+				'<section title="Test title 2" open="true">' +
+					'<partitionLayout>' +
+						'<partition>' +
+						'</partition>' +
+						'<partition>' +
+						'</partition>' +
+					'</partitionLayout>' +
+				'</section>' +
+				'<section title="Test title 3">' +
+				'</section>' +
+				'<section title="Test title 4">' +
+				'</section>' +
+			'</concertina>' +
+		'</drawer>' +
+
+		'<partitionLayout orientation="horizontal" split="30">' +
+
+			'<partition>' +
+				'<partitionLayout orientation="vertical" split="40">' +
+
+				'<partition>' +
+					'<tabLayout>' +
+						'<tab title="Things">' +
+							'<text>' +
+								'Tab 1 content' +
+							'</text>' +
+						'</tab>' +
+
+						'<tab title="Stuff">' +
+							'<partitionLayout>' +
+								'<partition>' +
+								'</partition>' +
+								'<partition>' +
+								'</partition>' +
+							'</partitionLayout>' +
+						'</tab>' +
+
+						'<tab title="Bits">' +
+							'<concertina>' +
+								'<section title="Test title 1">' +
+									'<text>' +
+										'Test text in a concertina.' +
+									'</text>' +
+								'</section>' +
+								'<section title="Test title 2" open="true">' +
+								'</section>' +
+								'<section title="Test title 3">' +
+								'</section>' +
+							'</concertina>' +
+						'</tab>' +
+
+						'<tab title="Bobs">' +
+							'<tabLayout>' +
+								'<tab title="Things">' +
+									'<text>' +
+										'Tab 1 content' +
+									'</text>' +
+								'</tab>' +
+
+								'<tab title="Stuff">' +
+									'<partitionLayout>' +
+										'<partition>' +
+										'</partition>' +
+										'<partition>' +
+										'</partition>' +
+									'</partitionLayout>' +
+								'</tab>' +
+
+								'<tab title="Bits">' +
+									'<concertina>' +
+										'<section title="Test title 1">' +
+											'<text>' +
+												'Test text in a concertina.' +
+											'</text>' +
+										'</section>' +
+										'<section title="Test title 2" open="true">' +
+										'</section>' +
+										'<section title="Test title 3">' +
+										'</section>' +
+									'</concertina>' +
+								'</tab>' +
+
+								'<tab title="Bobs">' +
+								'<text>' +
+								'Nothing to see here lol' +
+								'</text>' +
+								'</tab>' +
+							'</tabLayout>' +
+						'</tab>' +
+					'</tabLayout>' +
+				'</partition>' +
+
+				'<partition>' +
+					'<text>' +
+						'Test text in a partition.' +
+					'</text>' +
+				'</partition>' +
+
+				'</partitionLayout>' +
+			'</partition>' +
+
+			'<partition>' +
+				'<partitionLayout orientation="vertical">' +
+					'<partition>' +
+						'<text>' +
+							'Test text 2' +
+						'</text>' +
+					'</partition>' +
+					'<partition>' +
+						'<entityInput id="asdf"/>' +
+					'</partition>' +
+				'</partitionLayout>' +
+			'</partition>' +
+
+		'</partitionLayout>';
+
+	window2XML =
+		'<partitionLayout>' +
+			'<partition>' +
+				'<entityOutput id="test" />' +
+			'</partition>' +
+			'<partition>' +
+				'<entityInput id="test" />' +
+			'</partition>' +
+		'</partitionLayout>';
+
+	window3XML =
+		'<partitionLayout>' +
+			'<partition>' +
+				'<entityFeed id="test" />' +
+			'</partition>' +
+			'<partition>' +
+				'<entityInput id="test" />' +
+			'</partition>' +
+		'</partitionLayout>';
+
+	window4XML = '<entityMetadata id="test"/>';
+
+	window5XML =
+		'<partitionLayout>' +
+			'<partition>' +
+				'<tabLayout>' +
+					'<tab title="Feed">' +
+						'<entityFeed id="test"/>' +
+					'</tab>' +
+					'<tab title="Output">' +
+						'<entityOutput id="test"/>' +
+					'</tab>' +
+					'<tab title="Metadata">' +
+						'<entityMetadata id="test"/>' +
+					'</tab>' +
+				'</tabLayout>' +
+			'</partition>' +
+			'<partition>' +
+				'<entityInput id="test"/>' +
+			'</partition>' +
+		'</partitionLayout>';
+
+
+
+	cWindow_iconDiv = getDiv();
+	mainBody = document.getElementById('mainBody');
+
+	mainBody.appendChild(cWindow_iconDiv);
+
+	window6XML = '<treeView id="0cc175b9c0f1b6a831c399e269772661" />';
+
+	getCWindow(layoutXml, 'Test', 'flask');
+	entityInputCWindow = getCWindow(window2XML, 'Input', 'code');
+	entityInputCWindow = getCWindow(window3XML, 'Commentary', 'comment');
+	entityInputCWindow = getCWindow(window4XML, 'Metadata', 'tags');
+	entityInputCWindow = getCWindow(window5XML, 'Test', 'cube');
+	getCWindow(window6XML, 'TreeView', 'tree');
+
+
+	//		layout.onresize();
+
+
+	var searchInput = document.getElementById('searchInput');
+
+	searchInput.onkeypress = function (e) {
+		if (e.keyCode === 13 && this.value) {
+			SearchHandler(this.value);
+
+			cancelEvent(e);
+		}
+	};
+</script>
+
+</html>
