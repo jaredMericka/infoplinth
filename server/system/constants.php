@@ -29,7 +29,7 @@ const SESSION_USER	= 'u';
 
 const DBCONN_DB		= 'infoPlinth';
 const DBCONN_UNAME	= 'root';
-const DBCONN_PWORD	= '';
+const DBCONN_PWORD	= 'root';
 
 ////////////////////////////////////////////////////////////////////////////////
 //
